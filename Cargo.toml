@@ -1,0 +1,28 @@
+[package]
+name = "fediback"
+version = "0.1.0"
+edition = "2021"
+authors = ["dystroy <denys.seguret@gmail.com>"]
+repository = "https://github.com/Canop/fediback"
+description = "A mastodon account backup program"
+keywords = ["backup", "fediverse", "mastodon"]
+license = "MIT"
+categories = ["command-line-utilities"]
+readme = "README.md"
+rust-version = "1.62"
+exclude = ["website", "fediverse*.zip"]
+
+
+[dependencies]
+argh = "0.1.3"
+cli-log = "2.0.0"
+crossbeam = "0.8"
+directories-next = "2.0"
+lazy-regex = "2.3"
+reqwest = { version = "0.10", features = ["json", "blocking"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+terminal-light = "1.0"
+termimad = "0.20.4"
+
+
