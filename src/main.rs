@@ -73,7 +73,7 @@ fn main() -> Result<()> {
         }
         Some(ArgsCommand::Update(_)) | None => {
             let db = Db::new(&skin)?;
-            db.update(&conf, 2)?;
+            db.update(&conf, 8)?;
         }
     }
     info!("bye");
