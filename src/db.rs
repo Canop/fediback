@@ -77,17 +77,24 @@ impl<'s> Db<'s> {
             &user,
         )?;
         if let Some(url) = &user.following {
-            let following = client.get_items(url)?;
+            let following: Vec<String> = client.get_items(url)?;
             self.write(
                 user_dir.join("following.json"),
                 &following,
             )?;
         }
         if let Some(url) = &user.followers {
-            let followers = client.get_items(url)?;
+            let followers: Vec<String> = client.get_items(url)?;
             self.write(
                 user_dir.join("followers.json"),
                 &followers,
+            )?;
+        }
+        if let Some(url) = &user.featured {
+            let featured: Vec<Note> = client.get_items(url)?;
+            self.write(
+                user_dir.join("featured.json"),
+                &featured,
             )?;
         }
         Ok(())

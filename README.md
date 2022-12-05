@@ -22,7 +22,7 @@ cargo install fediback
 
 ## From precompiled binaries
 
-Executables for Windows and Linux are included in the releases published on GitHub: https://github.com/Canop/fediback/releases
+Executables for Windows and Linux are included in [the releases published on GitHub](https://github.com/Canop/fediback/releases).
 
 # Usage
 
@@ -42,15 +42,16 @@ Accounts are fetched in parallel.
 
 This operation can be done manually but there's no harm in having a cron rule if you can.
 
-For each account 3 files are saved on disk: one with core data, the list of followers and the list of users you follow:
+For each account 4 JSON files are saved on disk:
+
+* `user.json` with the core account data
+* `followers.json` with a list of users
+* `following.json` with a list of users too
+* `featured.json` with a list of "pinned" messages
 
 ![tree](doc/tree.png)
 
-The main file contains only some basic info:
-
 ![user.json](doc/user.json.png)
-
-The `following.json` and `followers.json` files contain list of users.
 
 ![following.json](doc/following.json.png)
 

@@ -37,12 +37,19 @@ impl Client {
         Ok(self.requester.get(url).send()?.json()?)
     }
 
-    pub fn get_items<S: Into<String>>(&self, url: S) -> Result<Vec<String>> {
+    pub fn get_items<S, Item>(
+        &self,
+        url: S,
+    ) -> Result<Vec<Item>>
+        where
+            S: Into<String>,
+            Item: DeserializeOwned,
+    {
         let mut url = url.into();
         let mut all = Vec::new();
         let mut queries = 0;
         loop {
-            let mut page: Page = self.get(&url)?;
+            let mut page: Page<Item> = self.get(&url)?;
             queries += 1;
             if let Some(items) = &mut page.ordered_items {
                 all.append(items);

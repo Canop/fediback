@@ -4,6 +4,7 @@ mod client;
 mod conf;
 mod db;
 mod error;
+mod note;
 mod page;
 mod public_key;
 mod skin;
@@ -17,6 +18,7 @@ pub use {
     conf::*,
     db::*,
     error::*,
+    note::*,
     page::*,
     public_key::*,
     user::*,
