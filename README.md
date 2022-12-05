@@ -22,7 +22,7 @@ cargo install fediback
 
 ## From precompiled binaries
 
-*wait, I didn't prepare them yet*
+Executables for Windows and Linux are included in the releases published on GitHub: https://github.com/Canop/fediback/releases
 
 # Usage
 
