@@ -64,7 +64,7 @@ impl Client {
             if queries >= MAX_QUERIES_PER_LIST {
                 warn!("too many queries");
                 if self.verbose {
-                    warn!("too many queries");
+                    eprintln!("too many queries");
                 }
                 break;
             }
