@@ -1,6 +1,7 @@
 use {
     crate::*,
     argh::FromArgs,
+    std::path::PathBuf,
 };
 
 #[derive(Debug, FromArgs)]
@@ -13,9 +14,21 @@ pub struct Args {
     #[argh(subcommand)]
     pub command: Option<ArgsCommand>,
 
+    /// print the default paths for your user
+    #[argh(switch)]
+    pub paths: bool,
+
     /// tell what files are modified
     #[argh(switch)]
     pub verbose: bool,
+
+    /// path to an configuration file, overriding default one
+    #[argh(option)]
+    pub conf: Option<PathBuf>,
+
+    /// path to a directory into which to write the saved data, overriding default one
+    #[argh(option)]
+    pub data: Option<PathBuf>,
 }
 
 #[derive(FromArgs, PartialEq, Debug)]

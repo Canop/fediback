@@ -34,8 +34,11 @@ pub struct Db<'s> {
 
 impl<'s> Db<'s> {
 
-    pub fn new(skin: &'s MadSkin) -> Result<Self> {
-        let dir = app_dirs()?.data_dir().to_path_buf();
+    pub fn standard_location() -> Result<PathBuf> {
+        Ok(app_dirs()?.data_dir().to_path_buf())
+    }
+
+    pub fn new(dir: PathBuf, skin: &'s MadSkin) -> Result<Self> {
         let verbose = false;
         let read_only = false;
         Ok(Self { dir, verbose, read_only, skin })

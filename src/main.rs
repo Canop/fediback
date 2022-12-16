@@ -38,7 +38,16 @@ fn main() -> Result<()> {
         println!("fediback {}", env!("CARGO_PKG_VERSION"));
         return Ok(());
     }
-    let mut conf = Conf::read()?;
+    if args.paths {
+        println!("configuration file: {:?}", Conf::standard_location()?);
+        println!("data directory: {:?}", Db::standard_location()?);
+        return Ok(());
+    }
+    let conf_path = match args.conf {
+        Some(path) => path,
+        None => Conf::standard_location()?,
+    };
+    let mut conf = Conf::read(&conf_path)?;
     let skin = skin::make_skin();
     match args.command {
         Some(ArgsCommand::Check(CheckCommand { user })) => {
@@ -50,11 +59,11 @@ fn main() -> Result<()> {
             skin.print_text(
                 "Run `fediback update` to fetch the complete profile."
             );
-            conf.save(&skin)?;
+            conf.save(&conf_path, &skin)?;
         }
         Some(ArgsCommand::Remove(RemoveCommand { user })) => {
             conf.remove(&user);
-            conf.save(&skin)?;
+            conf.save(&conf_path, &skin)?;
         }
         Some(ArgsCommand::List(_)) => {
             let mut users: Vec<&UserRef> = conf
@@ -74,7 +83,11 @@ fn main() -> Result<()> {
             }
         }
         Some(ArgsCommand::Update(_)) | None => {
-            let db = Db::new(&skin)?;
+            let db_path = match args.data {
+                Some(path) => path,
+                None => Db::standard_location()?,
+            };
+            let db = Db::new(db_path, &skin)?;
             db.update(&conf, 8)?;
         }
     }
